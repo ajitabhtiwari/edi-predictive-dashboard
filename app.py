@@ -77,6 +77,12 @@ format_err = st.sidebar.slider("Format Error Count", 0, 2, 0)
 partner_err = st.sidebar.slider("Partner Rule Violations", 0, 2, 0)
 order_lines = st.sidebar.slider("Number of Order Lines", 1, 20, 5)
 
+
+# ---------------------------------------------------
+# Sidebar 2 – Create EDI Data
+# ---------------------------------------------------
+st.sidebar.header("🧾 Create EDI Data")
+
 # ---------------------------------------------------
 # DQ Score Calculation
 # ---------------------------------------------------
