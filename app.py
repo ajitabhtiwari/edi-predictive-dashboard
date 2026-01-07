@@ -220,7 +220,7 @@ c1, c2, c3, c4 = st.columns(4)
 
 with c1:
     st.markdown(f"""
-    <div class="kpi" style="background:#1f77b4;">
+    <div class="kpi" style="background:#2ca02c;">
         <h2>{total_pos}</h2>
         <p>📦 Total POs</p>
     </div>
@@ -228,7 +228,7 @@ with c1:
 
 with c2:
     st.markdown(f"""
-    <div class="kpi" style="background:#d62728;">
+    <div class="kpi" style="background:#b32400;">
         <h2>{failed_pos}</h2>
         <p>❌ Failed Orders</p>
     </div>
@@ -236,7 +236,7 @@ with c2:
 
 with c3:
     st.markdown(f"""
-    <div class="kpi" style="background:#2ca02c;">
+    <div class="kpi" style="background:#6699cc;">
         <h2>{round(rf_accuracy*100,2)}%</h2>
         <p>🌲 RF Accuracy</p>
     </div>
@@ -244,7 +244,7 @@ with c3:
 
 with c4:
     st.markdown(f"""
-    <div class="kpi" style="background:#ff7f0e;">
+    <div class="kpi" style="background:##80ff80;">
         <h2>{round(xgb_accuracy*100,2)}%</h2>
         <p>⚡ XGBoost Accuracy</p>
     </div>
@@ -285,7 +285,7 @@ st.subheader("📈 Advanced Analytics")
 col1, col2 = st.columns(2)
 
 with col1:
-    st.write("**DQ Score Band Distribution 101**")
+    st.write("**DQ Score Band Distribution **")
 
     band_counts = pd.cut(
         data["dq_score"],
