@@ -1,3 +1,25 @@
+st.markdown("""
+<style>
+.kpi-card {
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    font-family: Arial, sans-serif;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+}
+.kpi-title {
+    font-size: 16px;
+    opacity: 0.9;
+}
+.kpi-value {
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+</style>
+""", unsafe_allow_html=True)
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -172,11 +194,41 @@ st.subheader("📊 Operational Summary")
 total_pos = len(data)
 failed_pos = data["order_failed"].sum()
 
-k1, k2, k3, k4 = st.columns(4)
-k1.metric("📦 Total POs", total_pos)
-k2.metric("❌ Failed Orders", failed_pos)
-k3.metric("🌲 RF Accuracy", f"{round(rf_accuracy*100, 2)}%")
-k4.metric("⚡ XGBoost Accuracy", f"{round(xgb_accuracy*100, 2)}%")
+st.subheader("📊 Operational Summary")
+
+c1, c2, c3, c4 = st.columns(4)
+
+with c1:
+    st.markdown(f"""
+    <div class="kpi-card" style="background-color:#1f77b4">
+        <div class="kpi-title">📦 Total POs</div>
+        <div class="kpi-value">{total_pos}</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c2:
+    st.markdown(f"""
+    <div class="kpi-card" style="background-color:#d62728">
+        <div class="kpi-title">❌ Failed Orders</div>
+        <div class="kpi-value">{failed_pos}</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c3:
+    st.markdown(f"""
+    <div class="kpi-card" style="background-color:#2ca02c">
+        <div class="kpi-title">🌲 RF Accuracy</div>
+        <div class="kpi-value">{round(rf_accuracy*100,2)}%</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c4:
+    st.markdown(f"""
+    <div class="kpi-card" style="background-color:#ff7f0e">
+        <div class="kpi-title">⚡ XGBoost Accuracy</div>
+        <div class="kpi-value">{round(xgb_accuracy*100,2)}%</div>
+    </div>
+    """, unsafe_allow_html=True)
 
 # ---------------------------------------------------
 # DQ METRICS
