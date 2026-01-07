@@ -77,12 +77,6 @@ format_err = st.sidebar.slider("Format Error Count", 0, 2, 0)
 partner_err = st.sidebar.slider("Partner Rule Violations", 0, 2, 0)
 order_lines = st.sidebar.slider("Number of Order Lines", 1, 20, 5)
 
-
-# ---------------------------------------------------
-# Sidebar 2 – Create EDI Data
-# ---------------------------------------------------
-st.sidebar.header("🧾 Create EDI Data")
-
 # ---------------------------------------------------
 # DQ Score Calculation
 # ---------------------------------------------------
@@ -148,53 +142,56 @@ X = data[features]
 y_fail = data["order_failed"]
 y_time = data["processing_time_min"]
 
-X_train, X_test, y_fail_train, y_fail_test = train_test_split(
-    X, y_fail, test_size=0.3, random_state=42
-)
+@st.cache_resource
+def train_models(data, features):
 
-_, _, y_time_train, y_time_test = train_test_split(
-    X, y_time, test_size=0.3, random_state=42
-)
+    X = data[features]
+    y_fail = data["order_failed"]
+    y_time = data["processing_time_min"]
 
-# ---------------------------------------------------
-# MODELS – CLASSIFICATION
-# ---------------------------------------------------
-rf_model = RandomForestClassifier(
-    n_estimators=100,
-    random_state=42,
-    class_weight="balanced"
-)
-rf_model.fit(X_train, y_fail_train)
+    X_train, X_test, y_fail_train, y_fail_test = train_test_split(
+        X, y_fail, test_size=0.3, random_state=42
+    )
 
-rf_accuracy = accuracy_score(
-    y_fail_test,
-    rf_model.predict(X_test)
-)
+    _, _, y_time_train, y_time_test = train_test_split(
+        X, y_time, test_size=0.3, random_state=42
+    )
 
-xgb_model = XGBClassifier(
-    n_estimators=120,
-    learning_rate=0.1,
-    max_depth=4,
-    eval_metric="logloss",
-    random_state=42
-)
-xgb_model.fit(X_train, y_fail_train)
+    rf_model = RandomForestClassifier(
+        n_estimators=100,
+        random_state=42,
+        class_weight="balanced"
+    )
+    rf_model.fit(X_train, y_fail_train)
 
-xgb_accuracy = accuracy_score(
-    y_fail_test,
-    xgb_model.predict(X_test)
-)
+    xgb_model = XGBClassifier(
+        n_estimators=120,
+        learning_rate=0.1,
+        max_depth=4,
+        eval_metric="logloss",
+        random_state=42,
+        verbosity=0
+    )
+    xgb_model.fit(X_train, y_fail_train)
 
-# ---------------------------------------------------
-# MODEL – PROCESSING TIME (REGRESSION)
-# ---------------------------------------------------
-time_model = XGBRegressor(
-    n_estimators=120,
-    learning_rate=0.1,
-    max_depth=4,
-    random_state=42
-)
-time_model.fit(X_train, y_time_train)
+    time_model = XGBRegressor(
+        n_estimators=120,
+        learning_rate=0.1,
+        max_depth=4,
+        random_state=42,
+        verbosity=0
+    )
+    time_model.fit(X_train, y_time_train)
+
+    rf_accuracy = accuracy_score(y_fail_test, rf_model.predict(X_test))
+    xgb_accuracy = accuracy_score(y_fail_test, xgb_model.predict(X_test))
+
+    return rf_model, xgb_model, time_model, rf_accuracy, xgb_accuracy
+
+with st.spinner("⏳ Training predictive models (one-time setup)..."):
+    rf_model, xgb_model, time_model, rf_accuracy, xgb_accuracy = train_models(
+        data, features
+    )
 
 # ---------------------------------------------------
 # Prediction for Current Order
