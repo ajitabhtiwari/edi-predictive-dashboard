@@ -213,7 +213,7 @@ st.subheader("📈 Advanced Analytics")
 col1, col2 = st.columns(2)
 
 with col1:
-    st.write("**DQ Score Band Distribution**")
+    st.write("**DQ Score Band Distribution Ajitabh**")
     band_counts = pd.cut(
         data["dq_score"],
         bins=[0,50,80,100],
