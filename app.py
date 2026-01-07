@@ -17,8 +17,49 @@ st.set_page_config(
     page_title="EDI Predictive Analytics Dashboard",
     layout="wide"
 )
+st.markdown(
+    """
+    <style>
+    .kpi {
+        border-radius: 14px;
+        padding: 25px;
+        text-align: center;
+        color: white;
+        height: 150px;
 
-st.title("            🚀 EDI Predictive Analytics Dashboard")
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+    }
+
+    .kpi:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 12px 24px rgba(0,0,0,0.35);
+        filter: brightness(1.05);
+    }
+
+    .kpi h2 {
+        font-size: 36px;
+        margin: 0;
+        font-weight: bold;
+    }
+
+    .kpi p {
+        font-size: 15px;
+        margin: 6px 0 0 0;
+        opacity: 0.9;
+        letter-spacing: 0.5px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+st.title("🚀 EDI Predictive Analytics Dashboard")
 st.markdown("""
 **Scope:**  
 Data Quality Scoring • Failure Risk Prediction • Processing Time Estimation  
@@ -174,11 +215,41 @@ failed_pos = data["order_failed"].sum()
 
 st.subheader("📊 Operational Summary")
 
-k1, k2, k3, k4 = st.columns(4)
-k1.metric("📦 Total POs", total_pos)
-k2.metric("❌ Failed Orders", failed_pos)
-k3.metric("🌲 RF Accuracy", f"{round(rf_accuracy*100, 2)}%")
-k4.metric("⚡ XGBoost Accuracy", f"{round(xgb_accuracy*100, 2)}%")
+st.subheader("📊 Operational Summary")
+
+c1, c2, c3, c4 = st.columns(4)
+
+with c1:
+    st.markdown(f"""
+    <div class="kpi" style="background:#1f77b4;">
+        <h2>{total_pos}</h2>
+        <p>📦 Total POs</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c2:
+    st.markdown(f"""
+    <div class="kpi" style="background:#d62728;">
+        <h2>{failed_pos}</h2>
+        <p>❌ Failed Orders</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c3:
+    st.markdown(f"""
+    <div class="kpi" style="background:#2ca02c;">
+        <h2>{round(rf_accuracy*100,2)}%</h2>
+        <p>🌲 RF Accuracy</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c4:
+    st.markdown(f"""
+    <div class="kpi" style="background:#ff7f0e;">
+        <h2>{round(xgb_accuracy*100,2)}%</h2>
+        <p>⚡ XGBoost Accuracy</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 # ---------------------------------------------------
 # DQ METRICS
