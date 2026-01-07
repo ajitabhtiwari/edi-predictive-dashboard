@@ -28,7 +28,7 @@ Data Quality Scoring • Failure Risk Prediction • Processing Time Estimation
 # ---------------------------------------------------
 # Sidebar – Incoming EDI Order
 # ---------------------------------------------------
-st.sidebar.header("🧾 Incoming EDI Order")
+st.sidebar.header("🧾 Incoming EDI Orders")
 
 missing = st.sidebar.slider("Missing Mandatory Fields", 0, 3, 0)
 invalid_ref = st.sidebar.slider("Invalid Reference Count", 0, 2, 0)
