@@ -216,10 +216,6 @@ st.subheader("📊 Operational Summary")
 total_pos = len(data)
 failed_pos = data["order_failed"].sum()
 
-st.subheader("📊 Operational Summary")
-
-st.subheader("📊 Operational Summary")
-
 c1, c2, c3, c4 = st.columns(4)
 
 with c1:
