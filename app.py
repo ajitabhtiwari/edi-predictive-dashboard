@@ -285,7 +285,7 @@ st.subheader("📈 Advanced Analytics")
 col1, col2 = st.columns(2)
 
 with col1:
-    st.write("**DQ Score Band Distribution **")
+    st.write("**DQ Score Band Distribution**")
 
     band_counts = pd.cut(
         data["dq_score"],
@@ -311,7 +311,57 @@ with col2:
         x="dq_score",
         y="processing_time_min"
     )
+    st.subheader("⏱️ Processing Time vs Data Quality Score")
 
+    # Prepare data
+    plot_df = data.copy()
+    plot_df["Status"] = np.where(plot_df["order_failed"] == 1, "Failed", "Successful")
+
+    fig, ax = plt.subplots(figsize=(8, 5))
+
+    colors = plot_df["Status"].map({
+        "Successful": "#2ca02c",
+        "Failed": "#d62728"
+    })
+
+    sizes = plot_df["order_lines"] * 8  # bubble size
+
+    scatter = ax.scatter(
+        plot_df["dq_score"],
+        plot_df["processing_time_min"],
+        s=sizes,
+        c=colors,
+        alpha=0.6
+    )
+
+    # Trend line
+    z = np.polyfit(plot_df["dq_score"], plot_df["processing_time_min"], 1)
+    p = np.poly1d(z)
+    ax.plot(
+        plot_df["dq_score"],
+        p(plot_df["dq_score"]),
+        linestyle="--",
+        color="black",
+        linewidth=2,
+        label="Trend"
+    )
+
+    ax.set_xlabel("Data Quality Score")
+    ax.set_ylabel("Processing Time (minutes)")
+    ax.set_title("Impact of Data Quality on Processing Time")
+
+    # Legend
+    from matplotlib.lines import Line2D
+    legend_elements = [
+        Line2D([0], [0], marker='o', color='w', label='Successful',
+               markerfacecolor='#2ca02c', markersize=10),
+        Line2D([0], [0], marker='o', color='w', label='Failed',
+               markerfacecolor='#d62728', markersize=10),
+    ]
+
+    ax.legend(handles=legend_elements, loc="upper right")
+
+    st.pyplot(fig)
 # ---------------------------------------------------
 # PO LEVEL TABLE
 # ---------------------------------------------------
