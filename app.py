@@ -244,7 +244,7 @@ with c3:
 
 with c4:
     st.markdown(f"""
-    <div class="kpi" style="background:##80ff80;">
+    <div class="kpi" style="background:#80ff80;">
         <h2>{round(xgb_accuracy*100,2)}%</h2>
         <p>⚡ XGBoost Accuracy</p>
     </div>
