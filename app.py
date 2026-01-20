@@ -305,12 +305,6 @@ with col1:
     st.pyplot(fig)
 
 with col2:
-    st.write("**Processing Time vs DQ Score**")
-    st.scatter_chart(
-        data,
-        x="dq_score",
-        y="processing_time_min"
-    )
     st.subheader("⏱️ Processing Time vs Data Quality Score")
 
     # Prepare data
