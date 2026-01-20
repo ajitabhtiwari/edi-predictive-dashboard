@@ -381,4 +381,14 @@ st.dataframe(
     use_container_width=True
 )
 
+    st.markdown("""
+    **Project Title:** Predictive Modeling and Data Quality Assurance for EDI Order Processing  
+    **Degree:** BITS WILP – Final Semester  
+    **Author:** Ajitabh Tiwari  
+
+    **Description:**  
+    This project integrates rule-based data quality validation with
+    machine learning models to predict EDI order failure risk and
+    estimate processing time, enabling proactive decision-making.
+    """)
 st.caption("Synthetic data used for final semester academic demonstration.")
