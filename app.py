@@ -286,7 +286,7 @@ col1, col2 = st.columns(2)
 
 with col1:
     st.write("**DQ Score Band Distribution**")
-
+    st.subheader("⏱️ DQ Score Band Distribution")
     band_counts = pd.cut(
         data["dq_score"],
         bins=[0, 50, 80, 100],
@@ -300,13 +300,12 @@ with col1:
 
     ax.set_xlabel("DQ Band")
     ax.set_ylabel("Number of Orders")
-    ax.set_title("DQ Score Band Distribution")
+    # ax.set_title("DQ Score Band Distribution")
 
     st.pyplot(fig)
 
 with col2:
     st.subheader("⏱️ Processing Time vs Data Quality Score")
-
     # Prepare data
     plot_df = data.copy()
     plot_df["Status"] = np.where(plot_df["order_failed"] == 1, "Failed", "Successful")
