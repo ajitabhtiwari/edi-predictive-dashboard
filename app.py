@@ -253,15 +253,15 @@ elif page == "📈 DQ Score Distribution":
         "The metrics above are recalculated dynamically based on incoming EDI order attributes."
     )
 
-# -------------------------------
-# DQ Band Calculation 
-# -------------------------------
-if dq_score >= 80:
-    dq_band = "🟢 Green"
-elif dq_score >= 50:
-    dq_band = "🟠 Amber"
-else:
-    dq_band = "🔴 Red"
+    # -------------------------------
+    # DQ Band Calculation 
+    # -------------------------------
+    if dq_score >= 80:
+        dq_band = "🟢 Green"
+    elif dq_score >= 50:
+        dq_band = "🟠 Amber"
+    else:
+        dq_band = "🔴 Red"
 
 # ===================================================
 # PAGE 3 – FAILURE RISK LEVELS
