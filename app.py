@@ -455,5 +455,13 @@ st.dataframe(
     ]],
     use_container_width=True
 )
+if page == "ℹ️ About Project":
+
+    st.markdown("""
+    **Project Title:** Predictive Modeling and Data Quality Assurance for EDI Order Processing  
+    **Program:** BITS WILP – Final Semester  
+    **Objective:** Improve reliability and efficiency of EDI order processing using
+    data quality scoring and predictive analytics.
+    """)
 
 st.caption("Synthetic data used for final semester academic demonstration.")
