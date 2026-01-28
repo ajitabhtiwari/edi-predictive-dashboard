@@ -200,7 +200,6 @@ if page == "📊 Operational Dashboard":
 # ===================================================
 elif page == "📈 DQ Score Distribution":
 
-    #st.subheader("📈 Data Quality Score Distribution")
 
     # ---------------------------------------------------
     # Sidebar – Incoming EDI Order
@@ -259,6 +258,9 @@ elif page == "📈 DQ Score Distribution":
     # ---------------------------------
     # Layout: Chart + Interpretation Table
     # ---------------------------------
+
+    st.subheader("📈 Data Quality Score Distribution")
+    
     col_chart, col_table = st.columns([2, 1])
 
     # ========= LEFT: DQ DISTRIBUTION CHART =========
