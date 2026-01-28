@@ -202,26 +202,35 @@ elif page == "📈 DQ Score Distribution":
 
     st.subheader("📈 Data Quality Score Distribution")
 
-    # ---------------------------------
-    # RE-CALCULATE DQ SCORE (SAFE)
-    # ---------------------------------
-    dq_score_local = max(
-        100 - (
-            missing * 15 +
-            invalid_ref * 20 +
-            format_err * 5 +
-            partner_err * 10
-        ),
-        0
+    # ---------------------------------------------------
+    # Sidebar – Incoming EDI Order
+    # ---------------------------------------------------
+    st.sidebar.header("🧾 Incoming EDI Orders")
+    
+    missing = st.sidebar.slider("Missing Mandatory Fields", 0, 3, 0)
+    invalid_ref = st.sidebar.slider("Invalid Reference Count", 0, 2, 0)
+    format_err = st.sidebar.slider("Format Error Count", 0, 2, 0)
+    partner_err = st.sidebar.slider("Partner Rule Violations", 0, 2, 0)
+    order_lines = st.sidebar.slider("Number of Order Lines", 1, 20, 5)
+    
+    # ---------------------------------------------------
+    # DQ Score Calculation
+    # ---------------------------------------------------
+    dq_score = 100 - (
+        missing * 15 +
+        invalid_ref * 20 +
+        format_err * 5 +
+        partner_err * 10
     )
-
-    # DQ Band based on recalculated score
-    if dq_score_local >= 80:
-        dq_band_local = "🟢 High (Green)"
-    elif dq_score_local >= 50:
-        dq_band_local = "🟠 Medium (Amber)"
+    dq_score = max(dq_score, 0)
+    
+    # DQ Band
+    if dq_score >= 80:
+        dq_band = "🟢 Green"
+    elif dq_score >= 50:
+        dq_band = "🟠 Amber"
     else:
-        dq_band_local = "🔴 Low (Red)"
+        dq_band = "🔴 Red"
 
     # ---------------------------------
     # Layout: Chart + Interpretation Table
