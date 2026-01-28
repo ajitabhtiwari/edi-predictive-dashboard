@@ -263,7 +263,26 @@ elif page == "📈 DQ Score Distribution":
     
     col_chart, col_table = st.columns([2, 1])
 
-    # ========= LEFT: DQ DISTRIBUTION CHART =========
+    
+    # ========= RIGHT: STATIC INTERPRETATION TABLE =========
+    with col_table:
+
+        st.markdown("### 📘 DQ Score Interpretation")
+
+        dq_table = pd.DataFrame({
+            "DQ Score Range": ["80 – 100", "50 – 79", "Below 50"],
+            "Quality Band": ["High (Green)", "Medium (Amber)", "Low (Red)"],
+            "Interpretation": [
+                "Order is reliable and low risk",
+                "Order requires attention",
+                "Order is high risk and likely to fail"
+            ]
+        })
+
+        st.table(dq_table)
+
+        st.caption("Table: DQ Score Bands and Interpretation")
+# ========= LEFT: DQ DISTRIBUTION CHART =========
     with col_chart:
 
         band_counts = pd.cut(
@@ -294,25 +313,6 @@ elif page == "📈 DQ Score Distribution":
             **Quality Band:** {dq_band}
             """
         )
-
-    # ========= RIGHT: STATIC INTERPRETATION TABLE =========
-    with col_table:
-
-        st.markdown("### 📘 DQ Score Interpretation")
-
-        dq_table = pd.DataFrame({
-            "DQ Score Range": ["80 – 100", "50 – 79", "Below 50"],
-            "Quality Band": ["High (Green)", "Medium (Amber)", "Low (Red)"],
-            "Interpretation": [
-                "Order is reliable and low risk",
-                "Order requires attention",
-                "Order is high risk and likely to fail"
-            ]
-        })
-
-        st.table(dq_table)
-
-        st.caption("Table: DQ Score Bands and Interpretation")
 
     # ---------------------------------------------------
     # PREDICTION RESULTS
