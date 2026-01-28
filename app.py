@@ -105,26 +105,60 @@ data["processing_time_min"] = (
 # ---------------------------------------------------
 @st.cache_resource
 def train_models(data):
-    features = ["dq_score","missing","invalid_ref","format_err","partner_err","order_lines"]
+
+    features = [
+        "dq_score",
+        "missing",
+        "invalid_ref",
+        "format_err",
+        "partner_err",
+        "order_lines"
+    ]
+
     X = data[features]
-    y = data["order_failed"]
+    y_fail = data["order_failed"]
     y_time = data["processing_time_min"]
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+    X_train, X_test, y_fail_train, y_fail_test = train_test_split(
+        X, y_fail, test_size=0.3, random_state=42
+    )
 
-    rf = RandomForestClassifier(n_estimators=100, random_state=42, class_weight="balanced")
-    rf.fit(X_train, y_train)
+    _, _, y_time_train, y_time_test = train_test_split(
+        X, y_time, test_size=0.3, random_state=42
+    )
 
-    xgb = XGBClassifier(n_estimators=120, learning_rate=0.1, max_depth=4,
-                        eval_metric="logloss", verbosity=0)
-    xgb.fit(X_train, y_train)
+    # -------- Classification Models --------
+    rf = RandomForestClassifier(
+        n_estimators=100,
+        random_state=42,
+        class_weight="balanced"
+    )
+    rf.fit(X_train, y_fail_train)
 
-    time_model = XGBRegressor(n_estimators=120, learning_rate=0.1, max_depth=4, verbosity=0)
-    time_model.fit(X_train, y_time)
+    xgb = XGBClassifier(
+        n_estimators=120,
+        learning_rate=0.1,
+        max_depth=4,
+        eval_metric="logloss",
+        verbosity=0,
+        random_state=42
+    )
+    xgb.fit(X_train, y_fail_train)
 
-    return rf, xgb, time_model, accuracy_score(y_test, rf.predict(X_test)), accuracy_score(y_test, xgb.predict(X_test))
+    # -------- Regression Model (FIXED) --------
+    time_model = XGBRegressor(
+        n_estimators=120,
+        learning_rate=0.1,
+        max_depth=4,
+        verbosity=0,
+        random_state=42
+    )
+    time_model.fit(X_train, y_time_train)  # ✅ FIX
 
-rf_model, xgb_model, time_model, rf_acc, xgb_acc = train_models(data)
+    rf_acc = accuracy_score(y_fail_test, rf.predict(X_test))
+    xgb_acc = accuracy_score(y_fail_test, xgb.predict(X_test))
+
+    return rf, xgb, time_model, rf_acc, xgb_acc
 
 # ===================================================
 # PAGE 1 – OPERATIONAL DASHBOARD
