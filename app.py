@@ -264,8 +264,8 @@ elif page == "📈 DQ Score Distribution":
 
         st.info(
             f"""
-            **Incoming Order DQ Score:** {dq_score_local}  
-            **Quality Band:** {dq_band_local}
+            **Incoming Order DQ Score:** {dq_score}  
+            **Quality Band:** {dq_band}
             """
         )
 
