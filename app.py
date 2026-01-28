@@ -207,16 +207,16 @@ if page == "📊 Operational Dashboard":
 elif page == "📈 DQ Score Distribution":
 
     st.subheader("📈 Data Quality Score Distribution")
-# ---------------------------------------------------
-# Sidebar – Incoming EDI Order
-# ---------------------------------------------------
-st.sidebar.header("🧾 Incoming EDI Order")
-
-missing = st.sidebar.slider("Missing Mandatory Fields", 0, 3, 0)
-invalid_ref = st.sidebar.slider("Invalid Reference Count", 0, 2, 0)
-format_err = st.sidebar.slider("Format Error Count", 0, 2, 0)
-partner_err = st.sidebar.slider("Partner Rule Violations", 0, 2, 0)
-#order_lines = st.sidebar.slider("Number of Order Lines", 1, 20, 5)
+    # ---------------------------------------------------
+    # Sidebar – Incoming EDI Order
+    # ---------------------------------------------------
+    st.sidebar.header("🧾 Incoming EDI Order")
+    
+    missing = st.sidebar.slider("Missing Mandatory Fields", 0, 3, 0)
+    invalid_ref = st.sidebar.slider("Invalid Reference Count", 0, 2, 0)
+    format_err = st.sidebar.slider("Format Error Count", 0, 2, 0)
+    partner_err = st.sidebar.slider("Partner Rule Violations", 0, 2, 0)
+    #order_lines = st.sidebar.slider("Number of Order Lines", 1, 20, 5)
     # -------------------------------
     # DQ Band Calculation (MUST BE FIRST)
     # -------------------------------
