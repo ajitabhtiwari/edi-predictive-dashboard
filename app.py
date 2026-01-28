@@ -268,7 +268,7 @@ with c2:
 
 with c3:
     st.markdown(f"""
-    <div class="kpi" style="background:#b32400;">
+    <div class="kpi" style="background:#2ca02c;">
         <h2>{success_pos}</h2>
         <p>❌ Successful Orders</p>
     </div>
@@ -298,6 +298,29 @@ with c6:
     </div>
     """, unsafe_allow_html=True)
 
+elif page == "📈 DQ Score Distribution":
+
+    st.subheader("📈 Data Quality Score Distribution")
+
+    band_counts = pd.cut(
+        data["dq_score"],
+        bins=[0, 50, 80, 100],
+        labels=["Red", "Amber", "Green"]
+    ).value_counts().reindex(["Red", "Amber", "Green"])
+
+    fig, ax = plt.subplots()
+    ax.bar(band_counts.index, band_counts.values,
+           color=["red", "orange", "green"])
+
+    ax.set_xlabel("DQ Band")
+    ax.set_ylabel("Number of Orders")
+    ax.set_title("DQ Score Band Distribution")
+
+    st.pyplot(fig)
+
+    st.caption(
+        "DQ scores are classified into risk bands to support early-stage decision-making."
+    )
 
 
 # ---------------------------------------------------
