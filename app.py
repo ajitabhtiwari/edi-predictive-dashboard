@@ -268,6 +268,32 @@ elif page == "📈 DQ Score Distribution":
             **Quality Band:** {dq_band}
             """
         )
+    # ---------------------------------------------------
+    # DQ METRICS
+    # ---------------------------------------------------
+    st.subheader("🧮 Data Quality Summary")
+    
+    dq1, dq2, dq3, dq4 = st.columns(4)
+    dq1.metric("DQ Score", dq_score)
+    dq2.metric("DQ Band", dq_band)
+    dq3.metric("Missing Fields", missing)
+    dq4.metric("Invalid References", invalid_ref)
+    
+    # ---------------------------------------------------
+    # PREDICTION RESULTS
+    # ---------------------------------------------------
+    st.subheader("🔮 Predictive Results")
+    
+    r1, r2 = st.columns(2)
+    r1.metric("Failure Probability", f"{round(fail_prob*100, 2)}%")
+    r2.metric("Predicted Processing Time", f"{round(pred_time,2)} min")
+    
+    if fail_prob > 0.7:
+        st.error("🔴 High Risk → Manual Review / Quarantine")
+    elif fail_prob > 0.4:
+        st.warning("🟠 Medium Risk → Monitor Closely")
+    else:
+        st.success("🟢 Low Risk → Auto Processing")
 
     # ========= RIGHT: STATIC INTERPRETATION TABLE =========
     with col_table:
