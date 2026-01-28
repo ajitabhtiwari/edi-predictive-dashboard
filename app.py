@@ -202,87 +202,72 @@ elif page == "📈 DQ Score Distribution":
 
     st.subheader("📈 Data Quality Score Distribution")
 
-    # -------------------------------
-    # DQ Band Calculation (MUST BE FIRST)
-    # -------------------------------
+    # ---------------------------------
+    # DQ Band Calculation (for incoming order)
+    # ---------------------------------
     if dq_score >= 80:
-        dq_band = "🟢 Green"
+        dq_band = "🟢 High (Green)"
     elif dq_score >= 50:
-        dq_band = "🟠 Amber"
+        dq_band = "🟠 Medium (Amber)"
     else:
-        dq_band = "🔴 Red"
-        
-    st.sidebar.header("🧾 Incoming EDI Orders")
-    
-    missing = st.sidebar.slider("Missing Mandatory Fields", 0, 3, 0)
-    invalid_ref = st.sidebar.slider("Invalid Reference Count", 0, 2, 0)
-    format_err = st.sidebar.slider("Format Error Count", 0, 2, 0)
-    partner_err = st.sidebar.slider("Partner Rule Violations", 0, 2, 0)
-    # -----------------------------
-    # Overall DQ Distribution
-    # -----------------------------
-    band_counts = pd.cut(
-        data["dq_score"],
-        bins=[0, 50, 80, 100],
-        labels=["Red", "Amber", "Green"]
-    ).value_counts().reindex(["Red", "Amber", "Green"])
+        dq_band = "🔴 Low (Red)"
 
-    fig, ax = plt.subplots(figsize=(7, 4))
-    ax.bar(
-        band_counts.index,
-        band_counts.values,
-        color=["red", "orange", "green"],
-        alpha=0.7
-    )
+    # ---------------------------------
+    # Layout: Chart + Interpretation Table
+    # ---------------------------------
+    col_chart, col_table = st.columns([2, 1])
 
-    ax.set_xlabel("DQ Band")
-    ax.set_ylabel("Number of Orders")
-    ax.set_title("Overall DQ Score Distribution")
+    # ========= LEFT: DQ DISTRIBUTION CHART =========
+    with col_chart:
 
-    st.pyplot(fig)
+        band_counts = pd.cut(
+            data["dq_score"],
+            bins=[0, 50, 80, 100],
+            labels=["Low (Red)", "Medium (Amber)", "High (Green)"]
+        ).value_counts().reindex(
+            ["Low (Red)", "Medium (Amber)", "High (Green)"]
+        )
 
-    # -----------------------------
-    # Incoming Order Snapshot
-    # -----------------------------
-    st.markdown("### 📍 Incoming EDI Order – Data Quality Snapshot")
+        fig, ax = plt.subplots(figsize=(7, 4))
+        ax.bar(
+            band_counts.index,
+            band_counts.values,
+            color=["red", "orange", "green"],
+            alpha=0.75
+        )
 
-    st.info(
-        f"""
-        **Current Incoming Order DQ Score:** {dq_score}  
-        **DQ Band:** {dq_band}
-        """
-    )
+        ax.set_xlabel("DQ Quality Band")
+        ax.set_ylabel("Number of Orders")
+        ax.set_title("Overall DQ Score Distribution")
 
-    # -----------------------------
-    # Data Quality Summary (OLD VIEW)
-    # -----------------------------
-    st.subheader("🧮 Data Quality Summary")
+        st.pyplot(fig)
 
-    dq1, dq2, dq3, dq4 = st.columns(4)
-    dq1.metric("DQ Score", dq_score)
-    dq2.metric("DQ Band", dq_band)
-    dq3.metric("Missing Fields", missing)
-    dq4.metric("Invalid References", invalid_ref)
+        st.info(
+            f"""
+            **Incoming Order DQ Score:** {dq_score}  
+            **Quality Band:** {dq_band}
+            """
+        )
 
-    # -----------------------------
-    # Predictive Results
-    # -----------------------------
-    st.subheader("🔮 Predictive Results")
+    # ========= RIGHT: STATIC INTERPRETATION TABLE =========
+    with col_table:
 
-    r1, r2 = st.columns(2)
-    r1.metric("Failure Probability", f"{round(fail_prob * 100, 2)}%")
-    r2.metric("Predicted Processing Time", f"{round(pred_time, 2)} min")
+        st.markdown("### 📘 DQ Score Interpretation")
 
-    if fail_prob > 0.7:
-        st.error("🔴 High Risk → Manual Review / Quarantine")
-    elif fail_prob > 0.4:
-        st.warning("🟠 Medium Risk → Monitor Closely")
-    else:
-        st.success("🟢 Low Risk → Auto Processing")
+        dq_table = pd.DataFrame({
+            "DQ Score Range": ["80 – 100", "50 – 79", "Below 50"],
+            "Quality Band": ["High (Green)", "Medium (Amber)", "Low (Red)"],
+            "Interpretation": [
+                "Order is reliable and low risk",
+                "Order requires attention",
+                "Order is high risk and likely to fail"
+            ]
+        })
 
-    st.caption(
-        "Metrics are recalculated dynamically based on incoming EDI order attributes."
-    )
+        st.table(dq_table)
+
+        st.caption("Table: DQ Score Bands and Interpretation")
+
 
 
 
