@@ -61,12 +61,6 @@ page = st.sidebar.radio(
 )
 
 
-
-# ---------------------------------------------------
-# DQ Score
-# ---------------------------------------------------
-dq_score = max(100 - (missing*15 + invalid_ref*20 + format_err*5 + partner_err*10), 0)
-
 # ---------------------------------------------------
 # Synthetic Dataset
 # ---------------------------------------------------
@@ -217,6 +211,12 @@ elif page == "📈 DQ Score Distribution":
     format_err = st.sidebar.slider("Format Error Count", 0, 2, 0)
     partner_err = st.sidebar.slider("Partner Rule Violations", 0, 2, 0)
     #order_lines = st.sidebar.slider("Number of Order Lines", 1, 20, 5)
+
+    # ---------------------------------------------------
+    # DQ Score
+    # ---------------------------------------------------
+    dq_score = max(100 - (missing*15 + invalid_ref*20 + format_err*5 + partner_err*10), 0)
+
     # -------------------------------
     # DQ Band Calculation (MUST BE FIRST)
     # -------------------------------
