@@ -180,6 +180,16 @@ elif page == "📈 DQ Score Distribution":
 
     st.subheader("📈 Data Quality Score Distribution")
 
+    # -------------------------------
+    # DQ Band Calculation (MUST BE FIRST)
+    # -------------------------------
+    if dq_score >= 80:
+        dq_band = "🟢 Green"
+    elif dq_score >= 50:
+        dq_band = "🟠 Amber"
+    else:
+        dq_band = "🔴 Red"
+
     # -----------------------------
     # Overall DQ Distribution
     # -----------------------------
@@ -204,11 +214,10 @@ elif page == "📈 DQ Score Distribution":
     st.pyplot(fig)
 
     # -----------------------------
-    # Incoming Order Position
+    # Incoming Order Snapshot
     # -----------------------------
     st.markdown("### 📍 Incoming EDI Order – Data Quality Snapshot")
 
-    # Show where current DQ score falls
     st.info(
         f"""
         **Current Incoming Order DQ Score:** {dq_score}  
@@ -217,7 +226,7 @@ elif page == "📈 DQ Score Distribution":
     )
 
     # -----------------------------
-    # OLD DASHBOARD VIEW (ADDED)
+    # Data Quality Summary (OLD VIEW)
     # -----------------------------
     st.subheader("🧮 Data Quality Summary")
 
@@ -228,19 +237,13 @@ elif page == "📈 DQ Score Distribution":
     dq4.metric("Invalid References", invalid_ref)
 
     # -----------------------------
-    # Prediction Results (Dynamic)
+    # Predictive Results
     # -----------------------------
     st.subheader("🔮 Predictive Results")
 
     r1, r2 = st.columns(2)
-    r1.metric(
-        "Failure Probability",
-        f"{round(fail_prob * 100, 2)}%"
-    )
-    r2.metric(
-        "Predicted Processing Time",
-        f"{round(pred_time, 2)} min"
-    )
+    r1.metric("Failure Probability", f"{round(fail_prob * 100, 2)}%")
+    r2.metric("Predicted Processing Time", f"{round(pred_time, 2)} min")
 
     if fail_prob > 0.7:
         st.error("🔴 High Risk → Manual Review / Quarantine")
@@ -250,18 +253,9 @@ elif page == "📈 DQ Score Distribution":
         st.success("🟢 Low Risk → Auto Processing")
 
     st.caption(
-        "The metrics above are recalculated dynamically based on incoming EDI order attributes."
+        "Metrics are recalculated dynamically based on incoming EDI order attributes."
     )
 
-    # -------------------------------
-    # DQ Band Calculation 
-    # -------------------------------
-    if dq_score >= 80:
-        dq_band = "🟢 Green"
-    elif dq_score >= 50:
-        dq_band = "🟠 Amber"
-    else:
-        dq_band = "🔴 Red"
 
 # ===================================================
 # PAGE 3 – FAILURE RISK LEVELS
