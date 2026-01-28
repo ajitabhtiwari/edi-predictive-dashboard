@@ -201,36 +201,8 @@ if page == "📊 Operational Dashboard":
 elif page == "📈 DQ Score Distribution":
 
     st.subheader("📈 Data Quality Score Distribution")
-   
 
-    # -----------------------------
-    # Data Quality Summary (OLD VIEW)
-    # -----------------------------
-    st.subheader("🧮 Data Quality Summary")
-
-    dq1, dq2, dq3, dq4 = st.columns(4)
-    dq1.metric("DQ Score", dq_score)
-    dq2.metric("DQ Band", dq_band)
-    dq3.metric("Missing Fields", missing)
-    dq4.metric("Invalid References", invalid_ref)
-    
-    # ---------------------------------------------------
-    # Sidebar – Incoming EDI Order
-    # ---------------------------------------------------
-    st.sidebar.header("🧾 Incoming EDI Order")
-    
-    missing = st.sidebar.slider("Missing Mandatory Fields", 0, 3, 0)
-    invalid_ref = st.sidebar.slider("Invalid Reference Count", 0, 2, 0)
-    format_err = st.sidebar.slider("Format Error Count", 0, 2, 0)
-    partner_err = st.sidebar.slider("Partner Rule Violations", 0, 2, 0)
-    #order_lines = st.sidebar.slider("Number of Order Lines", 1, 20, 5)
-
-    # ---------------------------------------------------
-    # DQ Score
-    # ---------------------------------------------------
-    dq_score = max(100 - (missing*15 + invalid_ref*20 + format_err*5 + partner_err*10), 0)
-
-   # -------------------------------
+    # -------------------------------
     # DQ Band Calculation (MUST BE FIRST)
     # -------------------------------
     if dq_score >= 80:
@@ -239,18 +211,13 @@ elif page == "📈 DQ Score Distribution":
         dq_band = "🟠 Amber"
     else:
         dq_band = "🔴 Red"
-    # -----------------------------
-    # Incoming Order Snapshot
-    # -----------------------------
-    st.markdown("### 📍 Incoming EDI Order – Data Quality Snapshot")
-
-    st.info(
-        f"""
-        **Current Incoming Order DQ Score:** {dq_score}  
-        **DQ Band:** {dq_band}
-        """
-    )
-
+        
+    st.sidebar.header("🧾 Incoming EDI Orders")
+    
+    missing = st.sidebar.slider("Missing Mandatory Fields", 0, 3, 0)
+    invalid_ref = st.sidebar.slider("Invalid Reference Count", 0, 2, 0)
+    format_err = st.sidebar.slider("Format Error Count", 0, 2, 0)
+    partner_err = st.sidebar.slider("Partner Rule Violations", 0, 2, 0)
     # -----------------------------
     # Overall DQ Distribution
     # -----------------------------
@@ -274,7 +241,28 @@ elif page == "📈 DQ Score Distribution":
 
     st.pyplot(fig)
 
-    
+    # -----------------------------
+    # Incoming Order Snapshot
+    # -----------------------------
+    st.markdown("### 📍 Incoming EDI Order – Data Quality Snapshot")
+
+    st.info(
+        f"""
+        **Current Incoming Order DQ Score:** {dq_score}  
+        **DQ Band:** {dq_band}
+        """
+    )
+
+    # -----------------------------
+    # Data Quality Summary (OLD VIEW)
+    # -----------------------------
+    st.subheader("🧮 Data Quality Summary")
+
+    dq1, dq2, dq3, dq4 = st.columns(4)
+    dq1.metric("DQ Score", dq_score)
+    dq2.metric("DQ Band", dq_band)
+    dq3.metric("Missing Fields", missing)
+    dq4.metric("Invalid References", invalid_ref)
 
     # -----------------------------
     # Predictive Results
@@ -297,13 +285,14 @@ elif page == "📈 DQ Score Distribution":
     )
 
 
+
 # ===================================================
 # PAGE 3 – FAILURE RISK LEVELS
 # ===================================================
 elif page == "🚨 Failure Risk Levels":
 
     st.subheader("🚨 Failure Risk Levels")
-
+    
     data["Risk Level"] = pd.cut(
         data["dq_score"], bins=[0,50,80,100],
         labels=["High","Medium","Low"]
