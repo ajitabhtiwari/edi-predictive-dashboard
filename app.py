@@ -215,6 +215,7 @@ with c4:
 # ===================================================
 elif page == "📈 DQ Score Distribution":
 
+    st.markdown("### 📍 Incoming EDI Order – Data Quality Snapshot")
    
 
     # -------------------------------
@@ -229,7 +230,7 @@ elif page == "📈 DQ Score Distribution":
   # -----------------------------
     # Incoming Order Snapshot
     # -----------------------------
-    st.markdown("### 📍 Incoming EDI Order – Data Quality Snapshot")
+    
 
     st.info(
         f"""
