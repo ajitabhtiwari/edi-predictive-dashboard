@@ -298,7 +298,20 @@ with c6:
     </div>
     """, unsafe_allow_html=True)
 
-elif page == "📈 DQ Score Distribution":
+
+
+# ---------------------------------------------------
+# DQ METRICS
+# ---------------------------------------------------
+st.subheader("🧮 Data Quality Summary")
+
+dq1, dq2, dq3, dq4 = st.columns(4)
+dq1.metric("DQ Score", dq_score)
+dq2.metric("DQ Band", dq_band)
+dq3.metric("Missing Fields", missing)
+dq4.metric("Invalid References", invalid_ref)
+
+if page == "📈 DQ Score Distribution":
 
     st.subheader("📈 Data Quality Score Distribution")
 
@@ -322,17 +335,6 @@ elif page == "📈 DQ Score Distribution":
         "DQ scores are classified into risk bands to support early-stage decision-making."
     )
 
-
-# ---------------------------------------------------
-# DQ METRICS
-# ---------------------------------------------------
-st.subheader("🧮 Data Quality Summary")
-
-dq1, dq2, dq3, dq4 = st.columns(4)
-dq1.metric("DQ Score", dq_score)
-dq2.metric("DQ Band", dq_band)
-dq3.metric("Missing Fields", missing)
-dq4.metric("Invalid References", invalid_ref)
 
 # ---------------------------------------------------
 # PREDICTION RESULTS
