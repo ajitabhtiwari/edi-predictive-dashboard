@@ -201,7 +201,15 @@ if page == "📊 Operational Dashboard":
 elif page == "📈 DQ Score Distribution":
 
     st.subheader("📈 Data Quality Score Distribution")
-
+      # -------------------------------
+    # DQ Band Calculation (MUST BE FIRST)
+    # -------------------------------
+    if dq_score >= 80:
+        dq_band = "🟢 Green"
+    elif dq_score >= 50:
+        dq_band = "🟠 Amber"
+    else:
+        dq_band = "🔴 Red"
     # -----------------------------
     # Incoming Order Snapshot
     # -----------------------------
@@ -241,15 +249,7 @@ elif page == "📈 DQ Score Distribution":
     # ---------------------------------------------------
     dq_score = max(100 - (missing*15 + invalid_ref*20 + format_err*5 + partner_err*10), 0)
 
-    # -------------------------------
-    # DQ Band Calculation (MUST BE FIRST)
-    # -------------------------------
-    if dq_score >= 80:
-        dq_band = "🟢 Green"
-    elif dq_score >= 50:
-        dq_band = "🟠 Amber"
-    else:
-        dq_band = "🔴 Red"
+  
 
     # -----------------------------
     # Overall DQ Distribution
