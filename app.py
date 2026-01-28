@@ -215,7 +215,7 @@ with c4:
 # ===================================================
 elif page == "📈 DQ Score Distribution":
 
- 
+     st.subheader("🚨 Failure Risk Levels")
    
 
     # -------------------------------
