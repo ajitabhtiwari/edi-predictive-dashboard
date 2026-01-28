@@ -299,24 +299,6 @@ with c6:
     """, unsafe_allow_html=True)
 
 
-if page == "📊 Operational Dashboard":
-
-    st.subheader("📊 Operational Dashboard")
-
-    total_pos = len(data)
-    failed_pos = data["order_failed"].sum()
-    success_pos = total_pos - failed_pos
-    avg_time = round(data["processing_time_min"].mean(), 2)
-
-    c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Total POs", total_pos)
-    c2.metric("Successful Orders", success_pos)
-    c3.metric("Failed Orders", failed_pos)
-    c4.metric("Avg Processing Time (min)", avg_time)
-
-    st.info(
-        "This view provides a real-time operational snapshot of EDI order processing performance."
-    )
 
 # ---------------------------------------------------
 # DQ METRICS
