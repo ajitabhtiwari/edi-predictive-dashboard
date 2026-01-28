@@ -228,10 +228,29 @@ pred_time = time_model.predict(input_df)[0]
 # ---------------------------------------------------
 st.subheader("📊 Operational Summary")
 
-total_pos = len(data)
-failed_pos = data["order_failed"].sum()
+#total_pos = len(data)
+#failed_pos = data["order_failed"].sum()
 
-c1, c2, c3, c4 = st.columns(4)
+if page == "📊 Operational Dashboard":
+
+    st.subheader("📊 Operational Dashboard")
+
+    total_pos = len(data)
+    failed_pos = data["order_failed"].sum()
+    success_pos = total_pos - failed_pos
+    avg_time = round(data["processing_time_min"].mean(), 2)
+
+    c1, c2, c3, c4 = st.columns(6)
+    c1.metric("Total POs", total_pos)
+    c2.metric("Successful Orders", success_pos)
+    c3.metric("Failed Orders", failed_pos)
+    c4.metric("Avg Processing Time (min)", avg_time)
+
+    st.info(
+        "This view provides a real-time operational snapshot of EDI order processing performance."
+    )
+
+c1, c2, c3, c4 = st.columns(6)
 
 with c1:
     st.markdown(f"""
@@ -251,13 +270,29 @@ with c2:
 
 with c3:
     st.markdown(f"""
+    <div class="kpi" style="background:#b32400;">
+        <h2>{success_pos}</h2>
+        <p>❌ Successful Orders</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c4:
+    st.markdown(f"""
+    <div class="kpi" style="background:#b32400;">
+        <h2>{avg_time}</h2>
+        <p>❌ Avg Processing Time (min)</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c5:
+    st.markdown(f"""
     <div class="kpi" style="background:#6699cc;">
         <h2>{round(rf_accuracy*100,2)}%</h2>
         <p>🌲 RF Accuracy</p>
     </div>
     """, unsafe_allow_html=True)
 
-with c4:
+with c6:
     st.markdown(f"""
     <div class="kpi" style="background:#80ff80;">
         <h2>{round(xgb_accuracy*100,2)}%</h2>
