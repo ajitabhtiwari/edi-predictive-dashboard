@@ -10,11 +10,6 @@ from sklearn.metrics import accuracy_score
 from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier, XGBRegressor
 
-
-
-
-
-
 # ---------------------------------------------------
 # Page Configuration
 # ---------------------------------------------------
@@ -70,7 +65,21 @@ st.markdown("""
 Data Quality Scoring • Failure Risk Prediction • Processing Time Estimation  
 *(Synthetic data – academic demonstration)*
 """)
+# ---------------------------------------------------
+st.sidebar.markdown("## 📌 Navigation")
 
+page = st.sidebar.radio(
+    "Select View",
+    [
+        "📊 Operational Dashboard",
+        "📈 DQ Score Distribution",
+        "🚨 Failure Risk Levels",
+        "⏱️ Processing Time & SLA Trends",
+        "🧪 Data Lab (CSV / Synthetic)",
+        "ℹ️ About Project"
+    ]
+)
+# ---------------------------------------------------
 # ---------------------------------------------------
 # Sidebar – Incoming EDI Order
 # ---------------------------------------------------
