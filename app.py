@@ -294,22 +294,6 @@ elif page == "📈 DQ Score Distribution":
             **Quality Band:** {dq_band}
             """
         )
-    
-    # ---------------------------------------------------
-    # PREDICTION RESULTS
-    # ---------------------------------------------------
-    st.subheader("🔮 Predictive Results")
-    
-    r1, r2 = st.columns(2)
-    r1.metric("Failure Probability", f"{round(fail_prob*100, 2)}%")
-    r2.metric("Predicted Processing Time", f"{round(pred_time,2)} min")
-    
-    if fail_prob > 0.7:
-        st.error("🔴 High Risk → Manual Review / Quarantine")
-    elif fail_prob > 0.4:
-        st.warning("🟠 Medium Risk → Monitor Closely")
-    else:
-        st.success("🟢 Low Risk → Auto Processing")
 
     # ========= RIGHT: STATIC INTERPRETATION TABLE =========
     with col_table:
@@ -330,7 +314,21 @@ elif page == "📈 DQ Score Distribution":
 
         st.caption("Table: DQ Score Bands and Interpretation")
 
-
+    # ---------------------------------------------------
+    # PREDICTION RESULTS
+    # ---------------------------------------------------
+    st.subheader("🔮 Predictive Results")
+    
+    r1, r2 = st.columns(2)
+    r1.metric("Failure Probability", f"{round(fail_prob*100, 2)}%")
+    r2.metric("Predicted Processing Time", f"{round(pred_time,2)} min")
+    
+    if fail_prob > 0.7:
+        st.error("🔴 High Risk → Manual Review / Quarantine")
+    elif fail_prob > 0.4:
+        st.warning("🟠 Medium Risk → Monitor Closely")
+    else:
+        st.success("🟢 Low Risk → Auto Processing")
 
 
 # ===================================================
