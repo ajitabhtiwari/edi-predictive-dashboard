@@ -178,7 +178,7 @@ if page == "📊 Operational Dashboard":
 # ===================================================
 elif page == "📈 DQ Score Distribution":
 
-    st.subheader("📈 Data Quality Score Distribution")
+   
 
     # -------------------------------
     # DQ Band Calculation (MUST BE FIRST)
@@ -214,6 +214,7 @@ elif page == "📈 DQ Score Distribution":
     # -----------------------------
     # Overall DQ Distribution
     # -----------------------------
+    st.subheader("📈 Data Quality Score Distribution")
     band_counts = pd.cut(
         data["dq_score"],
         bins=[0, 50, 80, 100],
