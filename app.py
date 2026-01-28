@@ -203,14 +203,25 @@ elif page == "📈 DQ Score Distribution":
     st.subheader("📈 Data Quality Score Distribution")
 
     # ---------------------------------
-    # DQ Band Calculation (for incoming order)
+    # RE-CALCULATE DQ SCORE (SAFE)
     # ---------------------------------
-    if dq_score >= 80:
-        dq_band = "🟢 High (Green)"
-    elif dq_score >= 50:
-        dq_band = "🟠 Medium (Amber)"
+    dq_score_local = max(
+        100 - (
+            missing * 15 +
+            invalid_ref * 20 +
+            format_err * 5 +
+            partner_err * 10
+        ),
+        0
+    )
+
+    # DQ Band based on recalculated score
+    if dq_score_local >= 80:
+        dq_band_local = "🟢 High (Green)"
+    elif dq_score_local >= 50:
+        dq_band_local = "🟠 Medium (Amber)"
     else:
-        dq_band = "🔴 Low (Red)"
+        dq_band_local = "🔴 Low (Red)"
 
     # ---------------------------------
     # Layout: Chart + Interpretation Table
@@ -244,8 +255,8 @@ elif page == "📈 DQ Score Distribution":
 
         st.info(
             f"""
-            **Incoming Order DQ Score:** {dq_score}  
-            **Quality Band:** {dq_band}
+            **Incoming Order DQ Score:** {dq_score_local}  
+            **Quality Band:** {dq_band_local}
             """
         )
 
