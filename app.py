@@ -232,6 +232,30 @@ elif page == "📈 DQ Score Distribution":
     else:
         dq_band = "🔴 Red"
 
+
+        # -----------------------------
+    # Incoming Order Snapshot
+    # -----------------------------
+    st.markdown("### 📍 Incoming EDI Order – Data Quality Snapshot")
+
+    st.info(
+        f"""
+        **Current Incoming Order DQ Score:** {dq_score}  
+        **DQ Band:** {dq_band}
+        """
+    )
+
+    # -----------------------------
+    # Data Quality Summary (OLD VIEW)
+    # -----------------------------
+    st.subheader("🧮 Data Quality Summary")
+
+    dq1, dq2, dq3, dq4 = st.columns(4)
+    dq1.metric("DQ Score", dq_score)
+    dq2.metric("DQ Band", dq_band)
+    dq3.metric("Missing Fields", missing)
+    dq4.metric("Invalid References", invalid_ref)
+    
     # ---------------------------------
     # Layout: Chart + Interpretation Table
     # ---------------------------------
