@@ -215,8 +215,7 @@ with c4:
 # ===================================================
 elif page == "📈 DQ Score Distribution":
 
-     st.subheader("🚨 Failure Risk Levels")
-   
+    st.subheader("📈 Data Quality Score Distribution")
 
     # -------------------------------
     # DQ Band Calculation (MUST BE FIRST)
@@ -227,32 +226,10 @@ elif page == "📈 DQ Score Distribution":
         dq_band = "🟠 Amber"
     else:
         dq_band = "🔴 Red"
-  # -----------------------------
-    # Incoming Order Snapshot
-    # -----------------------------
-    st.markdown("### 📍 Incoming EDI Order – Data Quality Snapshot"
 
-    st.info(
-        f"""
-        **Current Incoming Order DQ Score:** {dq_score}  
-        **DQ Band:** {dq_band}
-        """
-    )
-
-    # -----------------------------
-    # Data Quality Summary 
-    # -----------------------------
-    st.subheader("🧮 Data Quality Summary")
-
-    dq1, dq2, dq3, dq4 = st.columns(4)
-    dq1.metric("DQ Score", dq_score)
-    dq2.metric("DQ Band", dq_band)
-    dq3.metric("Missing Fields", missing)
-    dq4.metric("Invalid References", invalid_ref)
     # -----------------------------
     # Overall DQ Distribution
     # -----------------------------
-    st.subheader("📈 Data Quality Score Distribution")
     band_counts = pd.cut(
         data["dq_score"],
         bins=[0, 50, 80, 100],
@@ -272,6 +249,29 @@ elif page == "📈 DQ Score Distribution":
     ax.set_title("Overall DQ Score Distribution")
 
     st.pyplot(fig)
+
+    # -----------------------------
+    # Incoming Order Snapshot
+    # -----------------------------
+    st.markdown("### 📍 Incoming EDI Order – Data Quality Snapshot")
+
+    st.info(
+        f"""
+        **Current Incoming Order DQ Score:** {dq_score}  
+        **DQ Band:** {dq_band}
+        """
+    )
+
+    # -----------------------------
+    # Data Quality Summary (OLD VIEW)
+    # -----------------------------
+    st.subheader("🧮 Data Quality Summary")
+
+    dq1, dq2, dq3, dq4 = st.columns(4)
+    dq1.metric("DQ Score", dq_score)
+    dq2.metric("DQ Band", dq_band)
+    dq3.metric("Missing Fields", missing)
+    dq4.metric("Invalid References", invalid_ref)
 
     # -----------------------------
     # Predictive Results
