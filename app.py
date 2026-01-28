@@ -173,10 +173,10 @@ if page == "📊 Operational Dashboard":
     processing_time = round(data.processing_time_min.mean(),2)
     
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Total POs", total_pos)
-    c2.metric("Successful Orders", success_pos)
-    c3.metric("Failed Orders", failed_pos)
-    c4.metric("Avg Processing Time (min)", round(data.processing_time_min.mean(),2))
+    #c1.metric("Total POs", total_pos)
+    #c2.metric("Successful Orders", success_pos)
+    #c3.metric("Failed Orders", failed_pos)
+    #c4.metric("Avg Processing Time (min)", round(data.processing_time_min.mean(),2))
 
     with c1:
         st.markdown(f"""
@@ -185,15 +185,7 @@ if page == "📊 Operational Dashboard":
             <p>📦 Total POs</p>
         </div>
         """, unsafe_allow_html=True)
-    
     with c2:
-        st.markdown(f"""
-        <div class="kpi" style="background:#b32400;">
-            <h2>{failed_pos}</h2>
-            <p>❌ Failed Orders</p>
-        </div>
-        """, unsafe_allow_html=True)
-    with c3:
         st.markdown(f"""
         <div class="kpi" style="background:#2ca02c;">
             <h2>{success_pos}</h2>
@@ -201,6 +193,14 @@ if page == "📊 Operational Dashboard":
         </div>
         """, unsafe_allow_html=True)
         
+    with c3:
+        st.markdown(f"""
+        <div class="kpi" style="background:#b32400;">
+            <h2>{failed_pos}</h2>
+            <p>❌ Failed Orders</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
     with c4:
         st.markdown(f"""
         <div class="kpi" style="background:#e8cd1c;">
