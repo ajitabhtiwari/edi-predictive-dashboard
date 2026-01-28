@@ -167,11 +167,48 @@ if page == "📊 Operational Dashboard":
 
     st.subheader("📊 Operational Dashboard")
 
+    total_pos = len(data)
+    failed_pos = data.order_failed.sum()
+    success_pos =total_pos - failed_pos
+    processing_time = round(data.processing_time_min.mean(),2)
+    
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Total POs", len(data))
-    c2.metric("Successful Orders", len(data) - data.order_failed.sum())
-    c3.metric("Failed Orders", data.order_failed.sum())
+    c1.metric("Total POs", total_pos)
+    c2.metric("Successful Orders", success_pos)
+    c3.metric("Failed Orders", failed_pos)
     c4.metric("Avg Processing Time (min)", round(data.processing_time_min.mean(),2))
+
+with c1:
+    st.markdown(f"""
+    <div class="kpi" style="background:#2ca02c;">
+        <h2>{total_pos}</h2>
+        <p>📦 Total POs</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c2:
+    st.markdown(f"""
+    <div class="kpi" style="background:#b32400;">
+        <h2>{failed_pos}</h2>
+        <p>❌ Failed Orders</p>
+    </div>
+    """, unsafe_allow_html=True)
+with c3:
+    st.markdown(f"""
+    <div class="kpi" style="background:#b32400;">
+        <h2>{success_pos}</h2>
+        <p>⚡ Successful Orders</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+with c4:
+    st.markdown(f"""
+    <div class="kpi" style="background:#b32400;">
+        <h2>{processing_time}</h2>
+        <p>❌ Avg Processing Time (min)</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
 
 # ===================================================
 # PAGE 2 – DQ SCORE DISTRIBUTION
