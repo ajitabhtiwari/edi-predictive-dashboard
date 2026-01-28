@@ -240,7 +240,7 @@ if page == "📊 Operational Dashboard":
     success_pos = total_pos - failed_pos
     avg_time = round(data["processing_time_min"].mean(), 2)
 
-    c1, c2, c3, c4 = st.columns(6)
+    c1, c2, c3, c4, c5, c6 = st.columns(6)
     c1.metric("Total POs", total_pos)
     c2.metric("Successful Orders", success_pos)
     c3.metric("Failed Orders", failed_pos)
@@ -250,7 +250,7 @@ if page == "📊 Operational Dashboard":
         "This view provides a real-time operational snapshot of EDI order processing performance."
     )
 
-c1, c2, c3, c4 = st.columns(6)
+c1, c2, c3, c4, c5, c6 = st.columns(6)
 
 with c1:
     st.markdown(f"""
