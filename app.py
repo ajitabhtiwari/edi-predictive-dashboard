@@ -344,9 +344,59 @@ elif page == "🚨 Failure Risk Levels":
     # ---------------------------------------------------
     st.subheader("🔮 Predictive Results")
     
+    # ---------------------------------------------------
+    # Train models
+    # ---------------------------------------------------
+    rf_model, xgb_model, time_model, rf_acc, xgb_acc = train_models(data)
+    
+    st.caption(f"Model Accuracy → RF: {rf_acc:.2f} | XGB: {xgb_acc:.2f}")
+    
+    # ---------------------------------------------------
+    # Sidebar Inputs for Prediction
+    # ---------------------------------------------------
+    st.sidebar.header("🔮 Predict New Order")
+    
+    missing = st.sidebar.slider("Missing Fields", 0, 3, 0, key="f1")
+    invalid_ref = st.sidebar.slider("Invalid Ref", 0, 2, 0, key="f2")
+    format_err = st.sidebar.slider("Format Errors", 0, 2, 0, key="f3")
+    partner_err = st.sidebar.slider("Partner Errors", 0, 2, 0, key="f4")
+    order_lines = st.sidebar.slider("Order Lines", 1, 20, 5, key="f5")
+    
+    dq_score = 100 - (
+        missing * 15 +
+        invalid_ref * 20 +
+        format_err * 5 +
+        partner_err * 10
+    )
+    dq_score = max(dq_score, 0)
+    
+    # ---------------------------------------------------
+    # Prepare prediction row
+    # ---------------------------------------------------
+    input_df = pd.DataFrame([{
+        "dq_score": dq_score,
+        "missing": missing,
+        "invalid_ref": invalid_ref,
+        "format_err": format_err,
+        "partner_err": partner_err,
+        "order_lines": order_lines
+    }])
+    
+    # ---------------------------------------------------
+    # Predictions (THIS WAS MISSING ❌)
+    # ---------------------------------------------------
+    fail_prob = xgb_model.predict_proba(input_df)[0][1]
+    pred_time = time_model.predict(input_df)[0]
+    
+    # ---------------------------------------------------
+    # PREDICTION RESULTS UI
+    # ---------------------------------------------------
+    st.subheader("🔮 Predictive Results")
+    
     r1, r2 = st.columns(2)
+    
     r1.metric("Failure Probability", f"{round(fail_prob*100, 2)}%")
-    r2.metric("Predicted Processing Time", f"{round(pred_time,2)} min")
+    r2.metric("Predicted Processing Time", f"{round(pred_time, 2)} min")
     
     if fail_prob > 0.7:
         st.error("🔴 High Risk → Manual Review / Quarantine")
@@ -354,6 +404,7 @@ elif page == "🚨 Failure Risk Levels":
         st.warning("🟠 Medium Risk → Monitor Closely")
     else:
         st.success("🟢 Low Risk → Auto Processing")
+
 
 
 # ===================================================
