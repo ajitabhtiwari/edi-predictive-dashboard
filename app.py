@@ -34,6 +34,15 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# ---------------------------------------------------
+# Header
+# ---------------------------------------------------
+#st.title("🚀 EDI Predictive Analytics Dashboard")
+st.markdown("""
+**Scope:**  
+Data Quality Scoring • Failure Risk Prediction • Processing Time Estimation  
+*(Synthetic data – academic demonstration)*
+""")
 
 # ---------------------------------------------------
 # Sidebar Navigation
@@ -52,15 +61,7 @@ page = st.sidebar.radio(
     ]
 )
 
-# ---------------------------------------------------
-# Footer
-# ---------------------------------------------------
-#st.title("🚀 EDI Predictive Analytics Dashboard")
-st.markdown("""
-**Scope:**  
-Data Quality Scoring • Failure Risk Prediction • Processing Time Estimation  
-*(Synthetic data – academic demonstration)*
-""")
+
 # ---------------------------------------------------
 # Synthetic Dataset
 # ---------------------------------------------------
