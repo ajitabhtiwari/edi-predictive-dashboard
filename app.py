@@ -205,7 +205,7 @@ if page == "📊 Operational Dashboard":
 # ===================================================
 elif page == "📈 DQ Score Distribution":
 
-
+    st.header("📈 DQ Score Distribution")
     # ---------------------------------------------------
     # Sidebar – Incoming EDI Order
     # ---------------------------------------------------
