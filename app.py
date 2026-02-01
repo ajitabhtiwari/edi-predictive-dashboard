@@ -10,7 +10,9 @@ from sklearn.model_selection import train_test_split
 # ---------------------------------------------------
 # Page Configuration
 # ---------------------------------------------------
-st.set_page_config(page_title="EDI Predictive Analytics Dashboard", layout="wide")
+#st.set_page_config(page_title="EDI Predictive Analytics Dashboard", layout="wide")
+st.title("🏢 EDI Control Tower")
+st.caption("Predictive Risk • Data Quality • Processing Intelligence")
 
 # ---------------------------------------------------
 # Styles
