@@ -386,7 +386,9 @@ elif page == "🚨 Failure Risk Levels":
     # ---------------------------------------------------
     # Cached Predictions (FAST)
     # ---------------------------------------------------
-    fail_prob, pred_time = predict_cached(input_df, xgb_model, time_model)
+    fail_prob = xgb_model.predict_proba(input_df)[0][1]
+    pred_time = time_model.predict(input_df)[0]
+
     
     # ---------------------------------------------------
     # PREDICTION RESULTS UI (unchanged)
