@@ -174,7 +174,7 @@ if page == "📊 Operational Dashboard":
         st.markdown(f"""
         <div class="kpi" style="background:#2ca02c;">
             <h2>{success_pos}</h2>
-            <p>⚡ Successful Orders</p>
+            <p>✅ Successful Orders</p>
         </div>
         """, unsafe_allow_html=True)
         
@@ -182,7 +182,7 @@ if page == "📊 Operational Dashboard":
         st.markdown(f"""
         <div class="kpi" style="background:#b32400;">
             <h2>{failed_pos}</h2>
-            <p>❌ Failed Orders</p>
+            <p>🚫 Failed Orders</p>
         </div>
         """, unsafe_allow_html=True)
     
@@ -190,7 +190,7 @@ if page == "📊 Operational Dashboard":
         st.markdown(f"""
         <div class="kpi" style="background:#e8cd1c;">
             <h2>{processing_time}</h2>
-            <p>❌ Avg Processing Time (min)</p>
+            <p>🕒 Avg Processing Time (min)</p>
         </div>
         """, unsafe_allow_html=True)
     
