@@ -535,7 +535,7 @@ elif page == "ℹ️ About Project":
     ## 🎓 Academic Context
     **Project Title:** Predictive Modeling and Data Quality Assurance for EDI Order Processing  
     **Program:** BITS PILANI WILP – Final Semester  
-    **Created By** Ajitabh Tiwari
+    **Created By** Ajitabh Tiwari  
     This implementation serves as a proof-of-concept demonstrating how **AI/ML techniques can be integrated into enterprise EDI workflows** to deliver measurable operational improvements.
     
     ---
