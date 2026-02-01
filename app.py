@@ -37,7 +37,7 @@ st.markdown("""
 # ---------------------------------------------------
 # Header
 # ---------------------------------------------------
-st.title("🚀 EDI Predictive Analytics Dashboard")
+#st.title("🚀 EDI Predictive Analytics Dashboard")
 st.markdown("""
 **Scope:**  
 Data Quality Scoring • Failure Risk Prediction • Processing Time Estimation  
