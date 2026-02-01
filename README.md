@@ -1,4 +1,4 @@
-# edi-predictive-dashboard
+# 🏢 EDI Control Tower(edi-predictive-dashboard)
 edi-predictive-dashboard
 🏢 EDI Control Tower
 Predictive Risk • Data Quality • Processing Time Intelligence
