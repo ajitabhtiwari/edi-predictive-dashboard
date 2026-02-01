@@ -383,16 +383,13 @@ elif page == "🚨 Failure Risk Levels":
     }])
     
     # ---------------------------------------------------
-    # Predictions 
+    # Cached Predictions ✅
     # ---------------------------------------------------
-    fail_prob = xgb_model.predict_proba(input_df)[0][1]
-    pred_time = time_model.predict(input_df)[0]
+    fail_prob, pred_time = predict_cached(input_df, xgb_model, time_model)
     
     # ---------------------------------------------------
-    # PREDICTION RESULTS UI
+    # PREDICTION RESULTS UI (unchanged)
     # ---------------------------------------------------
-    st.subheader("🔮 Predictive Results")
-    
     r1, r2 = st.columns(2)
     
     r1.metric("Failure Probability", f"{round(fail_prob*100, 2)}%")
@@ -404,6 +401,7 @@ elif page == "🚨 Failure Risk Levels":
         st.warning("🟠 Medium Risk → Monitor Closely")
     else:
         st.success("🟢 Low Risk → Auto Processing")
+
 
 # ===================================================
 # PAGE 4 – PROCESSING TIME & SLA TRENDS
