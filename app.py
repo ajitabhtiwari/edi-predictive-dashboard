@@ -90,6 +90,7 @@ data["processing_time_min"] = (
 # ---------------------------------------------------
 @st.cache_resource
 def train_models(data):
+    
 @st.cache_data
 def predict_cached(input_df, xgb_model, time_model):
     fail_prob = xgb_model.predict_proba(input_df)[0][1]
