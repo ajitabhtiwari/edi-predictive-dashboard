@@ -314,22 +314,6 @@ elif page == "📈 DQ Score Distribution":
             """
         )
 
-    # ---------------------------------------------------
-    # PREDICTION RESULTS
-    # ---------------------------------------------------
-    st.subheader("🔮 Predictive Results")
-    
-    r1, r2 = st.columns(2)
-    r1.metric("Failure Probability", f"{round(fail_prob*100, 2)}%")
-    r2.metric("Predicted Processing Time", f"{round(pred_time,2)} min")
-    
-    if fail_prob > 0.7:
-        st.error("🔴 High Risk → Manual Review / Quarantine")
-    elif fail_prob > 0.4:
-        st.warning("🟠 Medium Risk → Monitor Closely")
-    else:
-        st.success("🟢 Low Risk → Auto Processing")
-
 
 # ===================================================
 # PAGE 3 – FAILURE RISK LEVELS
@@ -354,6 +338,23 @@ elif page == "🚨 Failure Risk Levels":
         }),
         use_container_width=True
     )
+
+    # ---------------------------------------------------
+    # PREDICTION RESULTS
+    # ---------------------------------------------------
+    st.subheader("🔮 Predictive Results")
+    
+    r1, r2 = st.columns(2)
+    r1.metric("Failure Probability", f"{round(fail_prob*100, 2)}%")
+    r2.metric("Predicted Processing Time", f"{round(pred_time,2)} min")
+    
+    if fail_prob > 0.7:
+        st.error("🔴 High Risk → Manual Review / Quarantine")
+    elif fail_prob > 0.4:
+        st.warning("🟠 Medium Risk → Monitor Closely")
+    else:
+        st.success("🟢 Low Risk → Auto Processing")
+
 
 # ===================================================
 # PAGE 4 – PROCESSING TIME & SLA TRENDS
