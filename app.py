@@ -11,6 +11,10 @@ from sklearn.model_selection import train_test_split
 # Page Configuration
 # ---------------------------------------------------
 st.title("🏢 EDI Control Tower - Predictive Analytics Dashboard")
+st.set_page_config(
+    page_title="🏢 EDI Control Tower - Predictive Analytics Dashboard",
+    layout="wide"
+)
 st.caption("Predictive Risk • Data Quality • Processing Time Intelligence")
 
 # ---------------------------------------------------
