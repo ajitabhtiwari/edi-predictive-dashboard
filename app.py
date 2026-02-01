@@ -451,96 +451,96 @@ elif page == "🧪 Data Lab (CSV / Synthetic)":
 # ===================================================
 elif page == "ℹ️ About Project":
 
-st.markdown("""
-# 🏢 EDI Control Tower  
-### Predictive Risk • Data Quality • Processing Time Intelligence
-
----
-
-## 📌 Overview
-**EDI Control Tower** is an intelligent operations dashboard designed to monitor, analyze, and predict the reliability of Electronic Data Interchange (EDI) order processing.  
-It combines **Data Quality scoring, Machine Learning models, and real-time analytics** to proactively detect failures, estimate processing delays, and improve SLA compliance.
-
-The platform helps operations and business teams move from **reactive issue handling → proactive risk prevention**.
-
----
-
-## 🎯 Objectives
-- Improve order processing reliability  
-- Reduce failed transactions and rework  
-- Predict processing delays in advance  
-- Enable faster operational decisions  
-- Provide visibility into data quality issues  
-
----
-
-## ⚙️ Key Capabilities
-### 📊 Data Quality Scoring
-Automatically evaluates incoming EDI orders based on:
-- Missing mandatory fields  
-- Invalid references  
-- Format violations  
-- Partner rule breaches  
-
-Orders are classified into **Green / Amber / Red risk bands**.
-
-### 🚨 Failure Risk Prediction
-Machine Learning models estimate the **probability of order failure** before processing, enabling:
-- Manual review
-- Exception handling
-- Risk mitigation
-
-### ⏱ Processing Time Estimation
-Predicts expected processing duration to:
-- Identify SLA breaches
-- Plan workloads
-- Optimize throughput
-
-### 📈 Operational Insights
-Interactive dashboards provide:
-- Risk distribution
-- DQ score trends
-- SLA performance
-- Predictive intelligence
-
----
-
-## 🤖 Technology Stack
-- **Frontend:** Streamlit  
-- **Data Processing:** Pandas, NumPy  
-- **Machine Learning:** Random Forest, XGBoost  
-- **Visualization:** Matplotlib  
-- **Language:** Python  
-
----
-
-## 🧠 Modeling Approach
-- Classification models → Failure prediction  
-- Regression models → Processing time estimation  
-- Synthetic dataset used for simulation and demonstration  
-- Designed to be extendable to real EDI transaction logs  
-
----
-
-## 💼 Business Value
-The Control Tower enables organizations to:
-- Reduce operational costs  
-- Prevent order failures  
-- Improve partner experience  
-- Achieve better SLA compliance  
-- Enhance decision-making with predictive insights  
-
----
-
-## 🎓 Academic Context
-**Project Title:** Predictive Modeling and Data Quality Assurance for EDI Order Processing  
-**Program:** BITS WILP – Final Semester  
-
-This implementation serves as a proof-of-concept demonstrating how **AI/ML techniques can be integrated into enterprise EDI workflows** to deliver measurable operational improvements.
-
----
-
-### ⚠️ Note
-Synthetic data is used for demonstration purposes only.
-""")
+    st.markdown("""
+    # 🏢 EDI Control Tower  
+    ### Predictive Risk • Data Quality • Processing Time Intelligence
+    
+    ---
+    
+    ## 📌 Overview
+    **EDI Control Tower** is an intelligent operations dashboard designed to monitor, analyze, and predict the reliability of Electronic Data Interchange (EDI) order processing.  
+    It combines **Data Quality scoring, Machine Learning models, and real-time analytics** to proactively detect failures, estimate processing delays, and improve SLA compliance.
+    
+    The platform helps operations and business teams move from **reactive issue handling → proactive risk prevention**.
+    
+    ---
+    
+    ## 🎯 Objectives
+    - Improve order processing reliability  
+    - Reduce failed transactions and rework  
+    - Predict processing delays in advance  
+    - Enable faster operational decisions  
+    - Provide visibility into data quality issues  
+    
+    ---
+    
+    ## ⚙️ Key Capabilities
+    ### 📊 Data Quality Scoring
+    Automatically evaluates incoming EDI orders based on:
+    - Missing mandatory fields  
+    - Invalid references  
+    - Format violations  
+    - Partner rule breaches  
+    
+    Orders are classified into **Green / Amber / Red risk bands**.
+    
+    ### 🚨 Failure Risk Prediction
+    Machine Learning models estimate the **probability of order failure** before processing, enabling:
+    - Manual review
+    - Exception handling
+    - Risk mitigation
+    
+    ### ⏱ Processing Time Estimation
+    Predicts expected processing duration to:
+    - Identify SLA breaches
+    - Plan workloads
+    - Optimize throughput
+    
+    ### 📈 Operational Insights
+    Interactive dashboards provide:
+    - Risk distribution
+    - DQ score trends
+    - SLA performance
+    - Predictive intelligence
+    
+    ---
+    
+    ## 🤖 Technology Stack
+    - **Frontend:** Streamlit  
+    - **Data Processing:** Pandas, NumPy  
+    - **Machine Learning:** Random Forest, XGBoost  
+    - **Visualization:** Matplotlib  
+    - **Language:** Python  
+    
+    ---
+    
+    ## 🧠 Modeling Approach
+    - Classification models → Failure prediction  
+    - Regression models → Processing time estimation  
+    - Synthetic dataset used for simulation and demonstration  
+    - Designed to be extendable to real EDI transaction logs  
+    
+    ---
+    
+    ## 💼 Business Value
+    The Control Tower enables organizations to:
+    - Reduce operational costs  
+    - Prevent order failures  
+    - Improve partner experience  
+    - Achieve better SLA compliance  
+    - Enhance decision-making with predictive insights  
+    
+    ---
+    
+    ## 🎓 Academic Context
+    **Project Title:** Predictive Modeling and Data Quality Assurance for EDI Order Processing  
+    **Program:** BITS WILP – Final Semester  
+    
+    This implementation serves as a proof-of-concept demonstrating how **AI/ML techniques can be integrated into enterprise EDI workflows** to deliver measurable operational improvements.
+    
+    ---
+    
+    ### ⚠️ Note
+    Synthetic data is used for demonstration purposes only.
+    """)
 
