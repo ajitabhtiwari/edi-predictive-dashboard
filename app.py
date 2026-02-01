@@ -342,6 +342,13 @@ elif page == "🚨 Failure Risk Levels":
     # ---------------------------------------------------
     # PREDICTION RESULTS
     # ---------------------------------------------------
+
+@st.cache_data
+def predict_cached(input_df, xgb_model, time_model):
+    fail_prob = xgb_model.predict_proba(input_df)[0][1]
+    pred_time = time_model.predict(input_df)[0]
+    return fail_prob, pred_time
+    
     st.subheader("🔮 Predictive Results")
     
     # ---------------------------------------------------
@@ -383,7 +390,7 @@ elif page == "🚨 Failure Risk Levels":
     }])
     
     # ---------------------------------------------------
-    # Cached Predictions ✅
+    # Cached Predictions (FAST)
     # ---------------------------------------------------
     fail_prob, pred_time = predict_cached(input_df, xgb_model, time_model)
     
@@ -401,6 +408,7 @@ elif page == "🚨 Failure Risk Levels":
         st.warning("🟠 Medium Risk → Monitor Closely")
     else:
         st.success("🟢 Low Risk → Auto Processing")
+
 
 
 # ===================================================
