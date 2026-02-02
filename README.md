@@ -1,50 +1,35 @@
 # 🏢 EDI Control Tower(edi-predictive-dashboard)
 edi-predictive-dashboard
-🏢 EDI Control Tower
+🏢 **EDI Control Tower**
 Predictive Risk • Data Quality • Processing Time Intelligence
 📌 Project Overview
 
 EDI Control Tower is an intelligent analytics dashboard built using Streamlit + Machine Learning to monitor and predict the reliability of Electronic Data Interchange (EDI) order processing.
-
 The system transforms raw operational data into:
-
 Data Quality scores
-
 Failure probability predictions
-
 Processing time forecasts
-
 SLA risk indicators
-
 Actionable operational insights
-
 It enables organizations to move from:
-
 Reactive issue handling → Proactive risk prevention
 
-🎯 Problem Statement
-
+🎯 **Problem Statement**
 Traditional EDI processing systems:
-
 detect failures after they occur
-
 lack early warning signals
-
 have limited visibility into data quality
-
 cause SLA breaches and manual rework
 
-Goal
-
+**Goal**
 Build a predictive dashboard that:
-
 ✅ detects bad orders early
 ✅ predicts failure risk
 ✅ estimates processing delays
 ✅ provides operational control tower visibility
 
 
-🏗 System Architecture
+🏗 **System Architecture**
 User (Browser)
       ↓
 Streamlit UI
@@ -55,7 +40,7 @@ ML Models (RF + XGBoost)
       ↓
 Predictions & Visualizations
 
-🧩 Technology Stack
+🧩 **Technology Stack**
 | Layer      | Technology              |
 | ---------- | ----------------------- |
 | Frontend   | Streamlit               |
@@ -65,41 +50,36 @@ Predictions & Visualizations
 | Charts     | Matplotlib              |
 | Deployment | Streamlit Cloud / Local |
 
-⚙️ Application Flow (High Level)
+⚙️ **Application Flow (High Level)**
 
 Generate or load dataset
-
 Compute Data Quality metrics
-
 Train ML models (cached)
-
 User selects dashboard page
-
 Predictions generated in real time
-
 Insights displayed visually
 
 
-📂 #Code Walkthrough (Module by Module)
-🔹 1.Import 
+📂 **Code Walkthrough (Module by Module)**
+🔹** 1.Import **
 import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-*Purpose*
+**Purpose**
 UI rendering
 data manipulation
 visualization
 ML processing
 
-🔹 2. Page Configuration
+🔹 **2. Page Configuration**
 st.set_page_config(layout="wide")
 Purpose
 Wide layout for dashboard feel
 Improves KPI card spacing
 
-🔹 3. Styling (CSS Cards)
+🔹 **3. Styling (CSS Cards)**
 st.markdown("<style>...</style>", unsafe_allow_html=True)
 Purpose
 Creates:
@@ -108,7 +88,7 @@ colors
 rounded borders
 shadows
 
-🔹 4. Sidebar Navigation
+🔹 **4. Sidebar Navigation**
 page = st.sidebar.radio(...)
 Purpose
 Implements multi-page behavior:
@@ -121,7 +101,7 @@ Implements multi-page behavior:
 | Data Lab              | Test CSV              |
 | About                 | Documentation         |
 
-🔹 5. Synthetic Dataset Generation
+🔹 **5. Synthetic Dataset Generation**
 data = pd.DataFrame({...})
 | Column              | Description         |
 | ------------------- | ------------------- |
@@ -142,7 +122,7 @@ demonstrate functionality
 Can be replaced with real production logs.
 
 
-🔹 6. Model Training (Core Intelligence)
+🔹 **6. Model Training (Core Intelligence)**
 @st.cache_resource
 def train_models(data):
 Why cache?
@@ -152,7 +132,7 @@ trained once
 reused across page refresh
 faster app
 
-Models Used
+**Models Used**
 1️⃣ Random Forest (Classification)
 Predicts order_failed
 2️⃣ XGBoost Classifier
@@ -160,13 +140,13 @@ Higher accuracy failure prediction
 3️⃣ XGBoost Regressor
 Predicts processing_time_min
 
-Output
+**Output**
 return rf, xgb, time_model, rf_acc, xgb_acc
 Used later for:
 predictions
 accuracy display
 
-🔹 7. Page Features Explained
+🔹 **7. Page Features Explained**
 📊 Operational Dashboard
 
 Shows KPIs:
@@ -177,7 +157,7 @@ Avg Processing Time
 Benefit
 Quick executive summary of system health.
 
-📈 DQ Score Distribution
+📈 **DQ Score Distribution**
 Features
 live DQ score calculator
 quality band classification
@@ -185,7 +165,7 @@ distribution chart
 Benefit
 Identify poor quality orders before processing.
 
-🚨 Failure Risk Levels (ML)
+🚨 **Failure Risk Levels (ML)**
 Workflow
 User enters order parameters
 Features built
@@ -228,7 +208,7 @@ GitHub readers
 interviewers
 stakeholders
 
-🧠 Machine Learning Strategy
+🧠 **Machine Learning Strategy**
 Classification
 Predict:
 Will order fail?
