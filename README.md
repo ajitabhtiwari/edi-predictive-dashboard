@@ -210,23 +210,23 @@ stakeholders
 
 🧠 **Machine Learning Strategy**
 Classification
-Predict:
+**Predict:**
 Will order fail?
 
-Target:
+**Target:**
 order_failed (0/1)
 
 
-Metric:
+**Metric:**
 Accuracy
 Regression
-Predict:
+**Predict:**
 How long will order take?
 
-Target:
+**Target:**
 processing_time_min
 
-Metric:
+**Metric:**
 MAE / RMSE (extendable)
 
 | Benefit                 | Impact              |
@@ -237,7 +237,7 @@ MAE / RMSE (extendable)
 | Central visibility      | faster decisions    |
 | Automation ready        | lower manual effort |
 
-🚀 Deployment
+🚀 **Deployment**
 Run locally
 streamlit run app.py
 Deploy
@@ -245,7 +245,7 @@ Streamlit Cloud
 Azure App Service
 Docker
 
-🔮 Future Enhancements
+🔮 **Future Enhancements**
 Planned improvements:
 SHAP explainability
 real-time streaming
@@ -256,13 +256,13 @@ alert notifications
 database integration
 dark theme UI
 
-🎓 Academic Context
+🎓 **Academic Context**
 
-Project: Predictive Modeling and Data Quality Assurance for EDI Orders
-Program: BITS Pilani WILP
-Author: Ajitabh Tiwari
+**Project:** Predictive Modeling and Data Quality Assurance for EDI Orders
+**Program:** BITS Pilani WILP
+**Author:** Ajitabh Tiwari
 
-Demonstrates integration of:
+**Demonstrates integration of:**
 Data Engineering
 Machine Learning
 Business Analytics
