@@ -258,9 +258,9 @@ dark theme UI
 
 🎓 **Academic Context**
 
-**Project:** Predictive Modeling and Data Quality Assurance for EDI Orders
-**Program:** BITS Pilani WILP
-**Author:** Ajitabh Tiwari
+**Project:** Predictive Modeling and Data Quality Assurance for EDI Orders 
+**Program:** BITS Pilani WILP 
+**Author:** Ajitabh Tiwari 
 
 **Demonstrates integration of:**
 Data Engineering
