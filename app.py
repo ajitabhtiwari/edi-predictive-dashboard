@@ -198,7 +198,46 @@ if page == "📊 Operational Dashboard":
             <p>🕒 Avg Processing Time (min)</p>
         </div>
         """, unsafe_allow_html=True)
+
+# ===================================================
+# Order Success vs Failure – Donut Chart + Metric
+# ===================================================
+
+    import matplotlib.pyplot as plt
     
+    st.subheader("📈 Order Success vs Failure")
+    
+    success_rate = round((success_pos / total_pos) * 100, 2) if total_pos > 0 else 0
+    
+    col1, col2 = st.columns([2, 1])
+    
+    # -----------------------------
+    # Donut Chart
+    # -----------------------------
+    with col1:
+        fig, ax = plt.subplots()
+    
+        ax.pie(
+            [success_pos, failed_pos],
+            labels=["Success", "Failure"],
+            autopct="%1.1f%%",
+            startangle=90,
+            wedgeprops=dict(width=0.45)  # donut effect
+        )
+    
+        ax.axis("equal")
+    
+        st.pyplot(fig)
+    
+    
+    # -----------------------------
+    # Success Rate Metric
+    # -----------------------------
+    with col2:
+        st.metric(
+            label="✅ Success Rate",
+            value=f"{success_rate} %",
+            delta=f"{success_pos} / {total_pos} Orders"
 
 # ===================================================
 # PAGE 2 – DQ SCORE DISTRIBUTION
