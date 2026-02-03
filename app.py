@@ -242,49 +242,6 @@ if page == "📊 Operational Dashboard":
             delta=f"{success_pos} / {total_pos} Orders" 
         )
 
-    #Processing Time Distribution#
-    # ===================================================
-# 🕒 Processing Time Trend (Daily Average)
-# ===================================================
-
-    # ===================================================
-# 🕒 Processing Time Trend (Auto Date Detection)
-# ===================================================
-
-    st.divider()
-    st.subheader("🕒 Avg Processing Time Trend")
-    
-    # try to find a date column automatically
-    possible_dates = ["order_date", "created_at", "date", "timestamp", "po_date"]
-    
-    date_col = None
-    for col in possible_dates:
-        if col in data.columns:
-            date_col = col
-            break
-    
-    if date_col is None:
-        st.warning("No date column found for trend chart")
-    else:
-        data[date_col] = pd.to_datetime(data[date_col])
-    
-        trend_df = (
-            data.groupby(data[date_col].dt.date)["processing_time_min"]
-            .mean()
-            .reset_index()
-        )
-    
-        trend_df.columns = ["Date", "Avg Processing Time (min)"]
-    
-        st.line_chart(
-            trend_df,
-            x="Date",
-            y="Avg Processing Time (min)",
-            use_container_width=True
-        )
-
-
-
     
     # ===================================================
     # Download Report Section
