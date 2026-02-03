@@ -209,7 +209,7 @@ if page == "📊 Operational Dashboard":
     
     success_rate = round((success_pos / total_pos) * 100, 2) if total_pos > 0 else 0
     
-    col1, col2 = st.columns([1.5, 1.2])
+    col1, col2 = st.columns([1.2, 1.8])
     
     # -----------------------------
     # Donut Chart
