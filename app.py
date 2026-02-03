@@ -222,7 +222,7 @@ if page == "📊 Operational Dashboard":
             labels=["Success", "Failure"],
             autopct="%1.1f%%",
             startangle=90,
-            wedgeprops=dict(width=0.45)  # donut effect
+            wedgeprops=dict(width=0.35)  # donut effect
         )
     
         ax.axis("equal")
