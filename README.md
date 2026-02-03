@@ -14,6 +14,23 @@ Actionable operational insights
 It enables organizations to move from:
 Reactive issue handling → Proactive risk prevention
 
+## 📊 Dashboard Preview
+
+### Operational Dashboard
+![Dashboard](screenshots/01_home.png)
+
+### DQ Distribution
+![DQ](screenshots/02_dq.png)
+
+### Risk Prediction
+![Risk](screenshots/03_risk.png)
+
+### Prediction
+![Risk](screenshots/04_prediction.png)
+
+### Data Lab
+![Data Lab](screenshots/05_datalab.png)
+
 🎯 **Problem Statement**
 Traditional EDI processing systems:
 detect failures after they occur
