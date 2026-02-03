@@ -242,6 +242,18 @@ if page == "📊 Operational Dashboard":
             delta=f"{success_pos} / {total_pos} Orders" 
         )
 
+    st.divider()
+    
+    c1, c2 = st.columns(2)
+    
+    with c1:
+        st.line_chart(trend_df, x="order_date", y="processing_time_min")
+    
+    with c2:
+        fig, ax = plt.subplots(figsize=(4,3))
+        ax.hist(data["processing_time_min"], bins=20)
+        st.pyplot(fig)
+    
     # ===================================================
     # Download Report Section
     # ===================================================
