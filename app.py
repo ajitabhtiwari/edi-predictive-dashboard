@@ -199,6 +199,8 @@ if page == "📊 Operational Dashboard":
         </div>
         """, unsafe_allow_html=True)
 
+    st.markdown("<br><br>", unsafe_allow_html=True)
+
 # ===================================================
 # Order Success vs Failure – Donut Chart + Metric
 # ===================================================
