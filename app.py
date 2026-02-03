@@ -243,6 +243,24 @@ if page == "📊 Operational Dashboard":
     # ===================================================
     # Download Report Section
     # ===================================================
+
+    st.markdown("""
+<style>
+div.stDownloadButton > button {
+    background-color: #1f77b4;
+    color: white;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 0.6em 1.2em;
+    border: none;
+}
+
+div.stDownloadButton > button:hover {
+    background-color: #155a8a;
+    color: white;
+}
+</style>
+""", unsafe_allow_html=True)
     
     import io
     import pandas as pd
