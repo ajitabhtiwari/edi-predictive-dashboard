@@ -247,28 +247,41 @@ if page == "📊 Operational Dashboard":
 # 🕒 Processing Time Trend (Daily Average)
 # ===================================================
 
+    # ===================================================
+# 🕒 Processing Time Trend (Auto Date Detection)
+# ===================================================
+
     st.divider()
-    st.subheader("🕒 Avg Processing Time Trend (Daily)")
+    st.subheader("🕒 Avg Processing Time Trend")
     
-    # ensure date column is datetime
-    data["order_date"] = pd.to_datetime(data["order_date"])
+    # try to find a date column automatically
+    possible_dates = ["order_date", "created_at", "date", "timestamp", "po_date"]
     
-    # group by day and calculate average processing time
-    trend_df = (
-        data.groupby(data["order_date"].dt.date)["processing_time_min"]
-        .mean()
-        .reset_index()
-    )
+    date_col = None
+    for col in possible_dates:
+        if col in data.columns:
+            date_col = col
+            break
     
-    trend_df.columns = ["Date", "Avg Processing Time (min)"]
+    if date_col is None:
+        st.warning("No date column found for trend chart")
+    else:
+        data[date_col] = pd.to_datetime(data[date_col])
     
-    # line chart
-    st.line_chart(
-        trend_df,
-        x="Date",
-        y="Avg Processing Time (min)",
-        use_container_width=True
-    )
+        trend_df = (
+            data.groupby(data[date_col].dt.date)["processing_time_min"]
+            .mean()
+            .reset_index()
+        )
+    
+        trend_df.columns = ["Date", "Avg Processing Time (min)"]
+    
+        st.line_chart(
+            trend_df,
+            x="Date",
+            y="Avg Processing Time (min)",
+            use_container_width=True
+        )
 
 
 
