@@ -243,17 +243,33 @@ if page == "📊 Operational Dashboard":
         )
 
     #Processing Time Distribution#
-    import matplotlib.pyplot as plt
+    # ===================================================
+# 🕒 Processing Time Trend (Daily Average)
+# ===================================================
+
+    st.divider()
+    st.subheader("🕒 Avg Processing Time Trend (Daily)")
     
-    st.subheader("🕒 Processing Time Distribution")
+    # ensure date column is datetime
+    data["order_date"] = pd.to_datetime(data["order_date"])
     
-    fig, ax = plt.subplots(figsize=(5,3))
+    # group by day and calculate average processing time
+    trend_df = (
+        data.groupby(data["order_date"].dt.date)["processing_time_min"]
+        .mean()
+        .reset_index()
+    )
     
-    ax.hist(data["processing_time_min"], bins=20)
-    ax.set_xlabel("Processing Time (min)")
-    ax.set_ylabel("Number of Orders")
+    trend_df.columns = ["Date", "Avg Processing Time (min)"]
     
-    st.pyplot(fig)
+    # line chart
+    st.line_chart(
+        trend_df,
+        x="Date",
+        y="Avg Processing Time (min)",
+        use_container_width=True
+    )
+
 
 
     
