@@ -240,6 +240,59 @@ if page == "📊 Operational Dashboard":
             delta=f"{success_pos} / {total_pos} Orders" 
         )
 
+    # ===================================================
+    # Download Report Section
+    # ===================================================
+    
+    import io
+    import pandas as pd
+    
+    st.subheader("⬇️ Download Report")
+    
+    # -----------------------------
+    # Prepare Summary Data
+    # -----------------------------
+    success_rate = round((success_pos / total_pos) * 100, 2) if total_pos > 0 else 0
+    
+    summary_df = pd.DataFrame({
+        "Metric": [
+            "Total Orders",
+            "Successful Orders",
+            "Failed Orders",
+            "Success Rate (%)",
+            "Avg Processing Time (min)"
+        ],
+        "Value": [
+            total_pos,
+            success_pos,
+            failed_pos,
+            success_rate,
+            processing_time
+        ]
+    })
+    
+    # -----------------------------
+    # Create Excel in memory
+    # -----------------------------
+    buffer = io.BytesIO()
+    
+    with pd.ExcelWriter(buffer, engine="xlsxwriter") as writer:
+        summary_df.to_excel(writer, sheet_name="Summary", index=False)
+        data.to_excel(writer, sheet_name="Raw_Data", index=False)
+    
+    buffer.seek(0)
+    
+    # -----------------------------
+    # Download Button
+    # -----------------------------
+    st.download_button(
+        label="📥 Download Operational Report (Excel)",
+        data=buffer,
+        file_name="Operational_Report.xlsx",
+        mime="application/vnd.ms-excel"
+    )
+
+
 # ===================================================
 # PAGE 2 – DQ SCORE DISTRIBUTION
 # ===================================================
