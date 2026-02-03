@@ -209,7 +209,7 @@ if page == "📊 Operational Dashboard":
     
     success_rate = round((success_pos / total_pos) * 100, 2) if total_pos > 0 else 0
     
-    col1, col2 = st.columns([2, 1])
+    col1, col2 = st.columns([1.5, 1.2])
     
     # -----------------------------
     # Donut Chart
@@ -222,7 +222,7 @@ if page == "📊 Operational Dashboard":
             labels=["Success", "Failure"],
             autopct="%1.1f%%",
             startangle=90,
-            wedgeprops=dict(width=0.35)  # donut effect
+            wedgeprops=dict(width=0.45)  # donut effect
         )
     
         ax.axis("equal")
