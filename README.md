@@ -17,19 +17,19 @@ Reactive issue handling → Proactive risk prevention
 ## 📊 Dashboard Preview
 
 ### Operational Dashboard
-![Dashboard](screenshots/01_home.png)
+![Dashboard](01_home.png)
 
 ### DQ Distribution
-![DQ](screenshots/02_dq.png)
+![DQ](02_dq.png)
 
 ### Risk Prediction
-![Risk](screenshots/03_risk.png)
+![Risk](03_risk.png)
 
 ### Prediction
-![Risk](screenshots/04_prediction.png)
+![Risk](04_prediction.png)
 
 ### Data Lab
-![Data Lab](screenshots/05_datalab.png)
+![Data Lab](05_datalab.png)
 
 🎯 **Problem Statement**
 Traditional EDI processing systems:
