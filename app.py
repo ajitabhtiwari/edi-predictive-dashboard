@@ -242,17 +242,19 @@ if page == "📊 Operational Dashboard":
             delta=f"{success_pos} / {total_pos} Orders" 
         )
 
-    st.divider()
+    #Processing Time Distribution#
+    import matplotlib.pyplot as plt
     
-    c1, c2 = st.columns(2)
+    st.subheader("🕒 Processing Time Distribution")
     
-    with c1:
-        st.line_chart(trend_df, x="order_date", y="processing_time_min")
+    fig, ax = plt.subplots(figsize=(5,3))
     
-    with c2:
-        fig, ax = plt.subplots(figsize=(4,3))
-        ax.hist(data["processing_time_min"], bins=20)
-        st.pyplot(fig)
+    ax.hist(data["processing_time_min"], bins=20)
+    ax.set_xlabel("Processing Time (min)")
+    ax.set_ylabel("Number of Orders")
+    
+    st.pyplot(fig)
+
     
     # ===================================================
     # Download Report Section
