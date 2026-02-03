@@ -204,7 +204,7 @@ if page == "📊 Operational Dashboard":
 # ===================================================
 
     import matplotlib.pyplot as plt
-    
+
     st.subheader("📈 Order Success vs Failure")
     
     success_rate = round((success_pos / total_pos) * 100, 2) if total_pos > 0 else 0
@@ -237,7 +237,8 @@ if page == "📊 Operational Dashboard":
         st.metric(
             label="✅ Success Rate",
             value=f"{success_rate} %",
-            delta=f"{success_pos} / {total_pos} Orders"
+            delta=f"{success_pos} / {total_pos} Orders" 
+        )
 
 # ===================================================
 # PAGE 2 – DQ SCORE DISTRIBUTION
