@@ -247,7 +247,7 @@ if page == "📊 Operational Dashboard":
     st.markdown("""
 <style>
 div.stDownloadButton > button {
-    background-color: #1f77b4;
+    background-color: #2ca02c;
     color: white;
     font-weight: 600;
     border-radius: 10px;
